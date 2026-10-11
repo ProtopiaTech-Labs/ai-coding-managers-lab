@@ -28,7 +28,6 @@ __pycache__/
 .venv/
 venv/
 env/
-.python-version
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
@@ -36,6 +35,26 @@ env/
 .coverage
 htmlcov/
 .ipynb_checkpoints/
+
+# --- Next.js / Vite ---
+next-env.d.ts
+.vercel/
+*.local
+
+# --- Tests (Playwright, coverage) ---
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# --- Local databases (SQLite) ---
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# --- Dev Containers ---
+.devcontainer/devcontainer-lock.json
 
 # --- Env / secrets ---
 .env
