@@ -1,0 +1,33 @@
+services:
+  app:
+    image: mcr.microsoft.com/devcontainers/base:ubuntu-24.04
+    command: sleep infinity
+    volumes:
+      - ../..:/workspaces:cached
+      # Logowanie do Claude Code i Codex przetrwa rebuild kontenera.
+      - claude-config:/home/vscode/.claude
+      - codex-config:/home/vscode/.codex
+    environment:
+      MSSQL_HOST: mssql
+      MSSQL_SA_PASSWORD: Lab-Passw0rd!
+
+  # Lokalny odpowiednik Azure SQL Database. Obraz tylko amd64:
+  # na Apple Silicon działa przez emulację Rosetta w Docker Desktop.
+  # Tag ubuntu-22.04, bo 2025-latest (ubuntu-24.04) losowo pada przy starcie:
+  # https://github.com/microsoft/mssql-docker/issues/974
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2025-CU9-ubuntu-22.04
+    platform: linux/amd64
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Developer
+      # Hasło tylko do lokalnego labu. Nie używaj go poza kontenerem.
+      MSSQL_SA_PASSWORD: Lab-Passw0rd!
+    volumes:
+      - mssql-data:/var/opt/mssql
+
+volumes:
+  claude-config:
+  codex-config:
+  mssql-data:

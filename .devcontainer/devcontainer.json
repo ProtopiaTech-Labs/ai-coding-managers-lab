@@ -1,0 +1,59 @@
+{
+  "name": "ai-coding-managers-lab",
+  "dockerComposeFile": "compose.yaml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "shutdownAction": "stopCompose",
+  "remoteUser": "vscode",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "lts" },
+    "ghcr.io/devcontainers/features/python:1": { "version": "3.12" },
+    "ghcr.io/devcontainers/features/azure-cli:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1": {}
+  },
+
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "16gb"
+  },
+
+  "forwardPorts": [3000, 8000, 1433],
+  "portsAttributes": {
+    "3000": { "label": "Next.js" },
+    "8000": { "label": "Python" },
+    "1433": { "label": "SQL Server", "onAutoForward": "silent" }
+  },
+
+  "remoteEnv": {
+    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}",
+    "OPENAI_API_KEY": "${localEnv:OPENAI_API_KEY}"
+  },
+
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "postStartCommand": "npm i -g @openai/codex@latest",
+
+  "customizations": {
+    "codespaces": {
+      "openFiles": ["README.md"]
+    },
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code",
+        "openai.chatgpt",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        "ms-python.python",
+        "charliermarsh.ruff",
+        "ms-mssql.mssql",
+        "qwtel.sqlite-viewer",
+        "ms-azuretools.vscode-azureresourcegroups",
+        "ms-azuretools.vscode-azureappservice",
+        "github.vscode-github-actions",
+        "bierner.markdown-mermaid"
+      ]
+    }
+  }
+}
