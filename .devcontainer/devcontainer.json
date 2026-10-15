@@ -35,11 +35,6 @@
     }
   },
 
-  "remoteEnv": {
-    "ANTHROPIC_API_KEY": "${localEnv:ANTHROPIC_API_KEY}",
-    "OPENAI_API_KEY": "${localEnv:OPENAI_API_KEY}"
-  },
-
   "postCreateCommand": "bash .devcontainer/post-create.sh",
   "postStartCommand": "npm i -g @openai/codex@latest",
 

@@ -10,6 +10,11 @@ services:
     environment:
       MSSQL_HOST: mssql
       MSSQL_SA_PASSWORD: Lab-Passw0rd!
+    # Lokalnie: klucze API w .devcontainer/.env (gitignore), niezależnie od tego,
+    # jak uruchomiono VS Code. W Codespaces pliku nie ma, sekrety wchodzą same.
+    env_file:
+      - path: .env
+        required: false
 
   # Lokalny odpowiednik Azure SQL Database. Obraz tylko amd64:
   # na Apple Silicon działa przez emulację Rosetta w Docker Desktop.
