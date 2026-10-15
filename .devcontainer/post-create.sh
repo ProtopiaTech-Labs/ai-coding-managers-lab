@@ -30,6 +30,7 @@ grep -q '.local/bin' ~/.zshrc 2>/dev/null || echo 'export PATH="$HOME/.local/bin
 
 # Pluginy z dokumentacją (Context7, Microsoft Learn). Plugin włączony tylko
 # w settings projektu nie instaluje się sam u uczestnika, więc instalacja tutaj.
+claude plugin marketplace add anthropics/claude-plugins-official
 claude plugin install context7@claude-plugins-official --scope user -y
 claude plugin install microsoft-docs@claude-plugins-official --scope user -y
 
