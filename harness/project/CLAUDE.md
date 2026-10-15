@@ -47,20 +47,34 @@ Maintain it yourself:
 
 ```text
 .
-├── <folder>/            # <what it holds, how it works>
-│   └── <key file>       # <entry point, config, ...>
-├── docs/plan/           # Plans, one file per feature block (NNN-<slug>.md)
-└── CLAUDE.md            # This file: rules, map, workflow
+├── app/                     # FastAPI backend (uv, SQLModel, SQLAlchemy 2.1 + mssql-python)
+│   ├── main.py              # Entry point: GET /api/health; serves web/dist when it exists
+│   ├── db.py                # Engine, creates the radar database if missing, DB ping
+│   └── config.py            # DATABASE_URL from env; default targets the mssql container
+├── migrations/              # Alembic: env.py reads DATABASE_URL, revisions in versions/
+├── tests/                   # pytest unit tests; e2e/ holds pytest-playwright scenarios
+├── web/                     # Vite + React + TS + Tailwind 4; shadcn/ui in src/components/ui
+│   ├── src/App.tsx          # Health page: fetches /api/health and shows the result
+│   ├── vite.config.ts       # Dev server; proxies /api to localhost:8000
+│   └── eslint.config.mjs    # ESLint thresholds; npm "check" runs eslint and tsc
+├── .claude/                 # settings.json (hooks), hooks/, agents/reviewer.md, rules/
+├── .github/workflows/ci.yml # CI on PR and push to main: Green gate without Playwright
+├── .devcontainer/           # Dev container and the mssql service (SQL Server)
+├── harness/                 # Source copies of CLAUDE.md and rules for lesson 04
+├── pyproject.toml           # Backend deps and thresholds: ruff, complexipy, vulture, pytest
+├── alembic.ini              # Alembic config; the URL comes from migrations/env.py
+├── REVIEW.md                # Checklist for the reviewer subagent (3 passes)
+└── CLAUDE.md                # This file: rules, map, workflow
 ```
 
 # Required MCP
 
 Use these servers for documentation. Do not answer API, CLI, or config questions from memory.
 
-| Server | Use for | Where it is configured |
+| Server | Use for | Install (user scope) |
 |---|---|---|
-| `context7` | Library and framework docs, versions | `.mcp.json` in this repo (stdio, `npx -y @upstash/context7-mcp`, no API key) |
-| `microsoft-learn` | Azure, .NET, M365, Microsoft docs | `.mcp.json` in this repo (http, `https://learn.microsoft.com/api/mcp`, no auth) |
+| `context7` | Library and framework docs, versions | `claude plugin install context7@claude-plugins-official --scope user` |
+| `microsoft-learn` | Azure, .NET, M365, Microsoft docs | `claude plugin install microsoft-docs@claude-plugins-official --scope user` |
 
 # Project Workflow
 
@@ -117,8 +131,9 @@ Task: T03
 
 ## Project specifics
 
-- Stack: backend FastAPI + `uv` in `app/` (SQLModel, SQLAlchemy 2.1 + `mssql-python`, Alembic), frontend React + Vite + TypeScript + Tailwind in `web/`. In production FastAPI serves `web/dist`.
-- UI: shadcn/ui components added with `npx shadcn@latest add <name>`. Write a custom component only for what shadcn/ui does not have (for example the radar circle as SVG) and say why in the PR.
+- Stack: backend FastAPI + `uv` in `app/` (SQLModel, SQLAlchemy 2.1 + `mssql-python`, Alembic), frontend React + Vite + TypeScript in `web/`. In production FastAPI serves `web/dist`.
+- Styling: Tailwind CSS 4 in `web/` through the `@tailwindcss/vite` plugin; shadcn/ui components live in `web/src/components/ui/`.
+- UI: shadcn/ui components added with npx shadcn@latest add <name>. Write a custom component only for what shadcn/ui does not have (for example the radar circle as SVG) and say why in the PR.
 - Database: SQL Server from the `mssql` container locally (`DATABASE_URL`), Azure SQL in production. Schema changes only through Alembic migrations.
 - Dev server: `uv run fastapi dev app/main.py` and `npm --prefix web run dev` (Vite proxies `/api` to port 8000).
 - Scenario driver: `pytest-playwright` in `tests/e2e/`, headless, with screenshots and the HTML report.

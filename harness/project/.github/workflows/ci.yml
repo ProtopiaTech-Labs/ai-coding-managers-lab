@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v10
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install backend dependencies
+        run: uv sync
+
+      - name: Install frontend dependencies
+        run: npm ci
+        working-directory: web
+
+      - name: pytest (without Playwright scenarios)
+        run: uv run pytest --ignore=tests/e2e
+
+      - name: ruff
+        run: uv run ruff check .
+
+      - name: ty
+        run: uv run ty check
+
+      - name: complexipy
+        run: uv run complexipy app
+
+      - name: vulture
+        run: uv run vulture
+
+      - name: eslint + tsc
+        run: npm --prefix web run check

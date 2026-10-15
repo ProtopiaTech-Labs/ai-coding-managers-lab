@@ -1,0 +1,59 @@
+[project]
+name = "radar"
+version = "0.1.0"
+description = "Radar web application"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "alembic>=1.20",
+    "fastapi[standard]>=0.143",
+    "mssql-python>=1.16",
+    "sqlalchemy>=2.1,<2.2",
+    "sqlmodel>=0.0.48",
+]
+
+[dependency-groups]
+dev = [
+    "complexipy>=8.0",
+    "httpx2>=2.13.1",
+    "pytest>=9.1",
+    "pytest-html>=4.2.0",
+    "pytest-playwright>=0.10",
+    "ruff>=0.17",
+    "ty>=0.0.88",
+    "vulture>=2.16",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "B", "UP", "SIM", "C90", "PLR", "ANN", "ERA"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 8
+
+[tool.ruff.lint.pylint]
+max-args = 4
+max-positional-args = 3
+max-branches = 8
+max-returns = 4
+max-statements = 30
+
+[tool.complexipy]
+paths = ["app"]
+max-complexity-allowed = 10
+
+[tool.vulture]
+paths = ["app"]
+min_confidence = 60
+# FastAPI registers route handlers through decorators.
+ignore_decorators = ["@app.get", "@app.post", "@app.put", "@app.patch", "@app.delete", "@router.*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+base_url = "http://localhost:5173"
+addopts = "--screenshot=on --output=test-results --html=playwright-report/index.html --self-contained-html"
