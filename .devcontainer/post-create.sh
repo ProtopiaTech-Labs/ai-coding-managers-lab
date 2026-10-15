@@ -28,7 +28,17 @@ curl -fsSL https://claude.ai/install.sh | bash
 grep -q '.local/bin' ~/.bashrc || echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 grep -q '.local/bin' ~/.zshrc 2>/dev/null || echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
 
-# Codex CLI (postStartCommand aktualizuje go przy każdym starcie)
+# apiKeyHelper: jedno źródło klucza dla CLI i rozszerzenia VS Code.
+# Plik pisze post-start.sh z sekretu Codespaces; lokalnie klucz idzie ze środowiska.
+node -e '
+const fs = require("fs");
+const p = process.env.HOME + "/.claude/settings.json";
+const s = fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, "utf8")) : {};
+s.apiKeyHelper = "cat $HOME/.claude/anthropic_key 2>/dev/null || printenv ANTHROPIC_API_KEY";
+fs.writeFileSync(p, JSON.stringify(s, null, 2) + "\n");
+'
+
+# Codex CLI (post-start.sh aktualizuje go przy każdym starcie)
 npm i -g @openai/codex@latest
 
 echo
