@@ -117,7 +117,8 @@ Task: T03
 
 ## Project specifics
 
-- Stack: backend FastAPI + `uv` in `app/` (SQLModel, SQLAlchemy 2.1 + `mssql-python`, Alembic), frontend React + Vite + TypeScript in `web/`. In production FastAPI serves `web/dist`.
+- Stack: backend FastAPI + `uv` in `app/` (SQLModel, SQLAlchemy 2.1 + `mssql-python`, Alembic), frontend React + Vite + TypeScript + Tailwind in `web/`. In production FastAPI serves `web/dist`.
+- UI: shadcn/ui components added with `npx shadcn@latest add <name>`. Write a custom component only for what shadcn/ui does not have (for example the radar circle as SVG) and say why in the PR.
 - Database: SQL Server from the `mssql` container locally (`DATABASE_URL`), Azure SQL in production. Schema changes only through Alembic migrations.
 - Dev server: `uv run fastapi dev app/main.py` and `npm --prefix web run dev` (Vite proxies `/api` to port 8000).
 - Scenario driver: `pytest-playwright` in `tests/e2e/`, headless, with screenshots and the HTML report.
