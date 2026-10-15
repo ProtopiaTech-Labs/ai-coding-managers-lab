@@ -4,9 +4,9 @@ set -euo pipefail
 # Named volumes powstają jako root. Oddaj je użytkownikowi vscode.
 sudo chown -R vscode:vscode /home/vscode/.claude /home/vscode/.codex
 
-# SQLite CLI
+# SQLite CLI; libltdl7 dla sterownika ODBC w mssql-python
 sudo apt-get update
-sudo apt-get install -y --no-install-recommends sqlite3 bzip2
+sudo apt-get install -y --no-install-recommends sqlite3 bzip2 libltdl7
 sudo rm -rf /var/lib/apt/lists/*
 
 # uv (Python)
