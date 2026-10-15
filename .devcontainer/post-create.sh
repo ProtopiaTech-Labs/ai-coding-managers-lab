@@ -21,6 +21,13 @@ esac
 curl -fsSL "https://github.com/microsoft/go-sqlcmd/releases/latest/download/sqlcmd-linux-${arch}.tar.bz2" \
   | sudo tar -xj -C /usr/local/bin sqlcmd
 
+# Claude Code: instalator natywny jako użytkownik vscode, do ~/.local.
+# Feature devcontainera instaluje przez npm jako root, przez co auto-update
+# nie ma prawa zapisu i wersja zostaje zamrożona na dzień budowy obrazu.
+curl -fsSL https://claude.ai/install.sh | bash
+grep -q '.local/bin' ~/.bashrc || echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+grep -q '.local/bin' ~/.zshrc 2>/dev/null || echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
+
 # Codex CLI (postStartCommand aktualizuje go przy każdym starcie)
 npm i -g @openai/codex@latest
 
