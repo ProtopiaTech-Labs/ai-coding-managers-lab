@@ -115,24 +115,6 @@ Task: T03
 4. Run scenarios in the real app, the way a user does, not against the API alone. Unit tests only for pure functions.
 5. Green = the project's build + test + typecheck commands.
 
-## External review (optional)
-
-A second model reviews the plan and every task result. Run reviews through the Bash tool with a 10-minute timeout, never through a plugin.
-
-Review brief (same text in every command): `Aggressive review. Check consistency, logic, and compliance with the Principles section of CLAUDE.md. Verify every claim against the repository files. Report concrete defects only, each with file and line. No praise.`
-
-### Reviewer: Codex CLI
-
-Needs the `codex` CLI and `codex login`. Model: `gpt-6.1-sol`.
-
-1. Plan, before you ask for approval: `codex exec -m gpt-6.1-sol -s read-only --ephemeral -o /tmp/plan-review.md "<brief> Subject: the plan below." < docs/plan/NNN-<slug>.md`
-2. Task result, before its commit: `codex exec review -m gpt-6.1-sol --uncommitted --ephemeral -o /tmp/task-review.md "<brief> Subject: this change against docs/plan/NNN-<slug>.md."`
-
-### After every review
-
-1. Fix every defect or write why you reject it. Re-run until the review returns no defects.
-2. Add the final review summary to the task in the plan file.
-
 ## Project specifics
 
 - Stack: backend FastAPI + `uv` in `app/` (SQLModel, SQLAlchemy 2.1 + `mssql-python`, Alembic), frontend React + Vite + TypeScript in `web/`. In production FastAPI serves `web/dist`.
