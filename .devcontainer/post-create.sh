@@ -28,6 +28,11 @@ curl -fsSL https://claude.ai/install.sh | bash
 grep -q '.local/bin' ~/.bashrc || echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 grep -q '.local/bin' ~/.zshrc 2>/dev/null || echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
 
+# Pluginy z dokumentacją (Context7, Microsoft Learn). Plugin włączony tylko
+# w settings projektu nie instaluje się sam u uczestnika, więc instalacja tutaj.
+claude plugin install context7@claude-plugins-official --scope user -y
+claude plugin install microsoft-docs@claude-plugins-official --scope user -y
+
 # apiKeyHelper: jedno źródło klucza dla CLI i rozszerzenia VS Code.
 # Plik pisze post-start.sh z sekretu Codespaces; lokalnie klucz idzie ze środowiska.
 node -e '
