@@ -57,10 +57,10 @@ Maintain it yourself:
 
 Use these servers for documentation. Do not answer API, CLI, or config questions from memory.
 
-| Server | Use for | Install (user scope) |
+| Server | Use for | Where it is configured |
 |---|---|---|
-| `context7` | Library and framework docs, versions | `claude plugin install context7@claude-plugins-official --scope user` |
-| `microsoft-learn` | Azure, .NET, M365, Microsoft docs | `claude plugin install microsoft-docs@claude-plugins-official --scope user` |
+| `context7` | Library and framework docs, versions | `.mcp.json` in this repo (stdio, `npx -y @upstash/context7-mcp`, no API key) |
+| `microsoft-learn` | Azure, .NET, M365, Microsoft docs | `.mcp.json` in this repo (http, `https://learn.microsoft.com/api/mcp`, no auth) |
 
 # Project Workflow
 
