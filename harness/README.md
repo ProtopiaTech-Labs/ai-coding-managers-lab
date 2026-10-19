@@ -1,8 +1,8 @@
 # Harness
 
-Gotowe pliki, które uczestnik stosuje w lekcji 05. Czyta to trener i agent uczestnika.
+Gotowe pliki, które uczestnik stosuje w lekcji 06. Czyta to trener i agent uczestnika.
 
-`project/` to wynik przebiegu próbnego z 2026-10-15 (prompt setupu z lekcji 05, potem shadcn), po poprawkach. `apply.sh` kopiuje go do korzenia repo i instaluje zależności:
+`project/` to wynik przebiegu próbnego z 2026-10-15 (prompt setupu z lekcji 06, potem shadcn), po poprawkach. `apply.sh` kopiuje go do korzenia repo i instaluje zależności:
 
 ```bash
 bash harness/apply.sh
