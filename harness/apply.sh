@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Kopiuje harness do korzenia repo i instaluje zależności. Uruchamiasz raz, w lekcji 04.
+# Kopiuje harness do korzenia repo i instaluje zależności. Uruchamiasz raz, w lekcji 05.
 set -euo pipefail
 root="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$root"
