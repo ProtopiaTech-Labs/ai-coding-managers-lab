@@ -30,7 +30,10 @@
       "description": "Klucz API Anthropic od trenera (Dane dostepowe na platformie). Wymagany dla Claude Code."
     },
     "OPENAI_API_KEY": {
-      "description": "Klucz API OpenAI dla Codex. Opcjonalny."
+      "description": "Klucz API OpenAI dla Codex. Opcjonalny, zostaw puste."
+    },
+    "OPENROUTER_API_KEY": {
+      "description": "Klucz OpenRouter od trenera (Dane dostepowe na platformie), limit 1 USD. Potrzebny dopiero w pracy domowej, lekcja 11. Opcjonalny."
     }
   },
 
