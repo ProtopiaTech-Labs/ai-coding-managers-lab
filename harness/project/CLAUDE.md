@@ -19,6 +19,7 @@ Keep in front of mind (every decision):
 1. Destructive action (rm -rf, force push, migration): confirm first.
 2. Three failed debug turns: stop, name the suspect assumption, ask one diagnostic question.
 3. Real ambiguity: one clarifying question beats guessing.
+4. Never start implementation on your own. After an interview, a spec, an issue list, or a plan: stop, summarize, and wait for an explicit instruction. Proposing the next step is fine. Doing it is not.
 
 Navigate with the "Repository map" section below and keep it current.
 
@@ -60,7 +61,7 @@ Maintain it yourself:
 ├── .claude/                 # settings.json (hooks), hooks/, agents/reviewer.md, rules/
 ├── .github/workflows/ci.yml # CI on PR and push to main: Green gate without Playwright
 ├── .devcontainer/           # Dev container and the mssql service (SQL Server)
-├── harness/                 # Source copies of CLAUDE.md and rules for lesson 04
+├── harness/                 # Source copies of CLAUDE.md and rules for lesson 07
 ├── pyproject.toml           # Backend deps and thresholds: ruff, complexipy, vulture, pytest
 ├── alembic.ini              # Alembic config; the URL comes from migrations/env.py
 ├── REVIEW.md                # Checklist for the reviewer subagent (3 passes)
@@ -120,6 +121,12 @@ Task: T03
 3. Every subagent prompt starts with the "Principles" section of this file, then: verified API snippets, the done criterion, the files it owns.
 4. Batch related tasks into one dispatch where quality holds. Run lanes with disjoint files in parallel.
 5. Only the orchestrator commits (or a sole-running agent). One small commit per task.
+
+## Review
+
+1. Before a pull request, the `reviewer` subagent reviews `git diff main`.
+2. Fix the defects from a `CHANGES` verdict and review again at most 2 times.
+3. Still `CHANGES` after the second round: stop and show the remaining defects to the user. The user decides.
 
 ## Running and testing
 
