@@ -20,6 +20,7 @@ Keep in front of mind (every decision):
 2. Three failed debug turns: stop, name the suspect assumption, ask one diagnostic question.
 3. Real ambiguity: one clarifying question beats guessing.
 4. Never start implementation on your own. After an interview, a spec, an issue list, or a plan: stop, summarize, and wait for an explicit instruction. Proposing the next step is fine. Doing it is not.
+5. Never create GitHub Issues, split work into features, or open a pull request unless the user asks for it in this session.
 
 Navigate with the "Repository map" section below and keep it current.
 
@@ -146,7 +147,7 @@ Task: T03
 - Scenario driver: `pytest-playwright` in `tests/e2e/`, headless, with screenshots and the HTML report.
 - Green: `uv run pytest && uv run ruff check . && uv run ty check && uv run complexipy app && uv run vulture && npm --prefix web run check`.
 - Quality thresholds live in `pyproject.toml` and `web/eslint.config.mjs`. Do not change them, do not add `noqa`, `type: ignore` or `eslint-disable`, do not commit with `--no-verify`.
-- Spec: `docs/spec.md` is the source of truth. Read it before any feature. One feature = one GitHub Issue = one branch = one pull request with `Closes #N`.
+- Spec: `docs/spec.md` is the source of truth. Read it before any task. Work on the issue the user names, on its own branch, and close it with `Closes #N` in the pull request.
 - Non-deterministic parts: none on the workshop day. The homework autoresearch feature calls a model with web search; test it with a scripted prompt on the real model.
 
 ## Agent mistakes
