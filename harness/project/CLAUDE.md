@@ -125,8 +125,8 @@ Task: T03
 ## Review
 
 1. Before a pull request, the `reviewer` subagent reviews `git diff main`.
-2. Fix the defects from a `CHANGES` verdict and review again at most 2 times.
-3. Still `CHANGES` after the second round: stop and show the remaining defects to the user. The user decides.
+2. Fix the defects from a `CHANGES` verdict and review again once.
+3. Still `CHANGES` after the second review: stop and show the remaining defects to the user. The user decides.
 
 ## Running and testing
 
