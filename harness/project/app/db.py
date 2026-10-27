@@ -19,11 +19,13 @@ def create_database_if_missing(url: str = DATABASE_URL) -> None:
         target.set(database="master"), isolation_level="AUTOCOMMIT"
     )
     quoted = server.dialect.identifier_preparer.quote_identifier(name)
-    with server.connect() as connection:
-        exists = connection.execute(text("SELECT DB_ID(:name)"), {"name": name}).scalar()
-        if exists is None:
-            connection.execute(text(f"CREATE DATABASE {quoted}"))
-    server.dispose()
+    try:
+        with server.connect() as connection:
+            exists = connection.execute(text("SELECT DB_ID(:name)"), {"name": name}).scalar()
+            if exists is None:
+                connection.execute(text(f"CREATE DATABASE {quoted}"))
+    finally:
+        server.dispose()
 
 
 def database_is_reachable() -> bool:

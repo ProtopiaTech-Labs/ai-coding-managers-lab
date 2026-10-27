@@ -1,5 +1,6 @@
 """FastAPI entry point: API routes and the built frontend."""
 
+import logging
 from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -7,15 +8,20 @@ from pathlib import Path
 from fastapi import FastAPI, status
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
+from sqlalchemy.exc import SQLAlchemyError
 
 from app.db import create_database_if_missing, database_is_reachable
 
 WEB_DIST = Path(__file__).resolve().parent.parent / "web" / "dist"
+log = logging.getLogger("radar")
 
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI) -> AsyncGenerator[None]:
-    create_database_if_missing()
+    try:
+        create_database_if_missing()
+    except SQLAlchemyError:
+        log.exception("database bootstrap failed; /api/health reports degraded")
     yield
 
 

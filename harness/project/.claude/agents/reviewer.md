@@ -1,6 +1,6 @@
 ---
 name: reviewer
-description: review zmian przed PR
+description: Review changes before a pull request
 tools: Read, Glob, Grep
 model: opus
 ---
