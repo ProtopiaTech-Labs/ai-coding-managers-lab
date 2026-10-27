@@ -24,7 +24,7 @@ Keep in front of mind (every decision):
 
 Navigate with the "Repository map" section below and keep it current.
 
-Conversation style comes from the output style. Rules for writing `.md` files live in `.claude/rules/writing-docs.md`.
+Conversation style comes from the output style. Talk to the user in Polish; keep code, file names, commands, and the documents the rules below require in English. Rules for writing `.md` files live in `.claude/rules/writing-docs.md`.
 
 # Session start
 
