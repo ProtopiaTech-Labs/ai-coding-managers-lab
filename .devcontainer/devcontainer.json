@@ -43,19 +43,7 @@
     },
     "vscode": {
       "extensions": [
-        "anthropic.claude-code",
-        "openai.chatgpt",
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode",
-        "bradlc.vscode-tailwindcss",
-        "ms-python.python",
-        "charliermarsh.ruff",
-        "ms-mssql.mssql",
-        "qwtel.sqlite-viewer",
-        "ms-azuretools.vscode-azureresourcegroups",
-        "ms-azuretools.vscode-azureappservice",
-        "github.vscode-github-actions",
-        "bierner.markdown-mermaid"
+        "anthropic.claude-code"
       ]
     }
   }
