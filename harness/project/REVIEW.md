@@ -1,6 +1,6 @@
 # Review checklist
 
-The `reviewer` subagent reads this file before each pull request. Check the diff in three passes, in this order.
+The `reviewer` subagent reads this file before each pull request. Check the diff in three passes, in this order. Report only defects that change behavior, security, or spec compliance. The review runs at most twice per pull request, so one round of fixes must be enough.
 
 ## 1. Bugs
 
